@@ -82,7 +82,7 @@ export default function Home() {
 {/* 3. FOTO SELURUH TIM - Fullscreen Ultra-Tall dengan Branding */}
 <section 
   className="relative w-full min-h-[110vh] flex items-start justify-center pt-2 sm:pt-4 bg-cover bg-center bg-no-repeat"
-  style={{ backgroundImage: "url('/tim-advokat.jpeg')" }} 
+  style={{ backgroundImage: "url('/tim-advokat.png')" }} 
 >
   {/* Overlay gelap tipis agar teks branding di atas tetap tajam dan terbaca */}
   <div className="absolute inset-0 bg-black/40 z-0"></div>
