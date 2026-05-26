@@ -21,7 +21,7 @@ export default function TimPage() {
       foto: "/tim/tris.jpeg"
     },
     {
-      nama: "Vicky Indra Saputra",
+      nama: "Vicky Indra Saputra, S.H.",
       jabatan: "LITIGATION",
       foto: "/tim/vicky.jpeg"
     },
@@ -56,7 +56,7 @@ export default function TimPage() {
         <div className="container mx-auto px-6 relative z-10 w-full">
           <div className="max-w-xl">
             <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold tracking-wide text-white drop-shadow-lg animate-float-slow select-none">
-              Tim Advokat
+              Tim Satyavrata
             </h1>
           </div>
         </div>

@@ -189,7 +189,7 @@ export default function Home() {
             Dibalik setiap kemenangan klien, ada dedikasi, integritas, dan taktik cerdas dari advokat-advokat terbaik kami.
           </p>
           <Link href="/tim" className="inline-block w-full sm:w-auto bg-amber-500 text-black font-bold px-10 py-3 md:py-4 rounded hover:bg-amber-400 transition-all text-sm md:text-base">
-            LIHAT PROFIL TIM ADVOKAT
+            LIHAT PROFIL TIM SATYAVRATA
           </Link>
         </div>
       </section>
