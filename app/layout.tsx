@@ -82,6 +82,7 @@ export default function RootLayout({
                   <li><Link href="/tentang" className="text-zinc-400 hover:text-amber-500 transition-colors text-sm flex items-center gap-2"><span className="text-amber-500/50">›</span> Tentang Kami</Link></li>
                   <li><Link href="/tim" className="text-zinc-400 hover:text-amber-500 transition-colors text-sm flex items-center gap-2"><span className="text-amber-500/50">›</span> Tim Advokat</Link></li>
                   <li><Link href="/artikel" className="text-zinc-400 hover:text-amber-500 transition-colors text-sm flex items-center gap-2"><span className="text-amber-500/50">›</span> Artikel / Wawasan</Link></li>
+                  <li><Link href="/jdih" className="text-zinc-400 hover:text-amber-500 transition-colors text-sm flex items-center gap-2"><span className="text-amber-500/50">›</span> JDIH</Link></li>
                   <li><Link href="/galeri" className="text-zinc-400 hover:text-amber-500 transition-colors text-sm flex items-center gap-2"><span className="text-amber-500/50">›</span> Galeri Klien</Link></li>
                   <li><Link href="/kontak" className="text-zinc-400 hover:text-amber-500 transition-colors text-sm flex items-center gap-2"><span className="text-amber-500/50">›</span> Kontak</Link></li>
                 </ul>
@@ -103,7 +104,7 @@ export default function RootLayout({
               <div className="space-y-6">
                 <h4 className="text-white font-serif tracking-widest text-sm uppercase border-b border-zinc-800 pb-3">Hubungi Kami</h4>
                 <div className="space-y-4 text-zinc-400 text-sm">
-                  <p>Jalan Pendidikan Nomor 46, Pasar Rebo, Jakarta Timur, DKI Jakarta.</p>
+                  <p>Jalan Pendidikan Nomor 46, Pekayon, Pasar Rebo, Jakarta Timur, DKI Jakarta.</p>
                   <p className="text-amber-500 font-bold">+62 895-6096-38341</p>
                   <p>tristiawanh@gmail.com</p>
                 </div>
@@ -112,7 +113,7 @@ export default function RootLayout({
             </div>
 
             <div className="mt-16 pt-8 border-t border-zinc-900 text-center text-zinc-600 text-[10px]">
-              © {new Date().getFullYear()} Kantor Hukum Satyavrata & Partners. All Rights Reserved.
+              © {new Date().getFullYear()} Kantor Hukum Satyavrata. All Rights Reserved.
             </div>
           </div>
         </footer>

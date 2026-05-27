@@ -24,6 +24,7 @@ export default function Navbar() {
     { name: 'Tentang Kami', path: '/tentang' },
     { name: 'Tim Kami', path: '/tim' },
     { name: 'Artikel', path: '/artikel' },
+    { name: 'JDIH', path: '/jdih' }, // Menu JDIH ditambahkan di sini
     { name: 'Galeri', path: '/galeri' },
   ];
 
@@ -35,7 +36,7 @@ export default function Navbar() {
         {/* LOGO - Satyavrata */}
         <Link href="/" className="flex items-center gap-3 select-none">
           <div className="relative w-9 h-9 overflow-hidden rounded">
-            <Image src="/logo.png" alt="Logo" fill className="object-contain" />
+            <Image src="/logo.png" alt="Logo" fill className="object-contain" sizes="36px" />
           </div>
           <div className="flex flex-col justify-center">
             <span className="font-serif tracking-[0.2em] text-lg font-bold text-amber-500 leading-none">SATYAVRATA</span>
