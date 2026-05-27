@@ -15,7 +15,6 @@ export default function ArtikelPage() {
   const [articles, setArticles] = useState<any[]>([]);
   const [selectedCategory, setSelectedCategory] = useState("Semua");
   
-  // Kategori final sesuai saran 3 pilar hukum
   const categories = ["Semua", "Hukum Konstitusi & Kebijakan", "Hukum Bisnis & Agraria", "Litigasi & Advokasi"];
 
   useEffect(() => {
@@ -40,7 +39,7 @@ export default function ArtikelPage() {
 
   return (
     <div className="min-h-screen bg-[#0B0C10] text-white pt-16 pb-24 overflow-x-hidden">
-      {/* SECTION HERO: Responsif */}
+      {/* SECTION HERO */}
       <section className="relative w-full h-[35vh] flex items-center bg-cover bg-center bg-no-repeat" style={{ backgroundImage: "url('/background.jpg')" }}>
         <div className="absolute inset-0 bg-gradient-to-r from-black via-black/85 to-transparent z-0"></div>
         <div className="container mx-auto px-6 relative z-10">
@@ -48,7 +47,7 @@ export default function ArtikelPage() {
         </div>
       </section>
 
-      {/* FILTER: Dengan Animasi Elegan */}
+      {/* FILTER */}
       <section className="container mx-auto px-6 max-w-5xl mt-12 mb-12">
         <div className="flex flex-wrap gap-3 pb-4 border-b border-zinc-900">
           {categories.map((cat) => (
@@ -67,7 +66,7 @@ export default function ArtikelPage() {
         </div>
       </section>
 
-      {/* GRID ARTIKEL: Responsif HP (1 kolom) ke Dekstop (3 kolom) */}
+      {/* GRID ARTIKEL */}
       <section className="container mx-auto px-6 max-w-5xl">
         {filteredArticles.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -91,7 +90,12 @@ export default function ArtikelPage() {
                     <span>{art.date || "Baru"}</span>
                   </div>
                   <h2 className="font-serif text-lg font-bold mb-3 leading-tight group-hover:text-amber-500 transition-colors">{art.judulArtikel || "Tanpa Judul"}</h2>
-                  <p className="text-zinc-400 text-xs line-clamp-4 leading-relaxed">{art.konten || "Klik baca untuk melihat isi artikel."}</p>
+                  
+                  {/* Bagian ini sudah diperbaiki supaya tidak error */}
+                  <p className="text-zinc-400 text-xs line-clamp-4 leading-relaxed">
+                    Klik tombol baca untuk melihat isi artikel selengkapnya.
+                  </p>
+
                   <div className="mt-4 pt-4 border-t border-zinc-900 flex justify-between items-center">
                     <span className="text-[10px] text-zinc-500">Oleh: {art.author || "Admin"}</span>
                     {art.slug?.current ? (

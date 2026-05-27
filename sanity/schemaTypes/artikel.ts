@@ -13,7 +13,14 @@ export default {
         maxLength: 96 
       } 
     },
-    { name: 'konten', title: 'Konten', type: 'text' },
+    { 
+  name: 'konten', 
+  title: 'Konten', 
+  type: 'array', 
+  of: [
+    { type: 'block' } // Ini yang memungkinkan kamu Bold, Italic, dan Poin-poin
+  ] 
+},
     { name: 'gambar', title: 'Gambar', type: 'image' },
     { 
       name: 'category', 

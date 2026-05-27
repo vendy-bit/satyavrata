@@ -10,6 +10,8 @@ export default defineConfig({
   projectId: 'xvpo8zb2',
   dataset: 'production',
 
+  basePath: '/studio', // <-- TAMBAHKAN BARIS INI
+
   plugins: [structureTool(), visionTool()],
 
   schema: {

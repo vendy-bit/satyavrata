@@ -1,3 +1,4 @@
+import { PortableText } from '@portabletext/react';
 import { client } from '@/sanity/client';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -11,12 +12,13 @@ function urlFor(source: any) {
 export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
 
-  // Query mengambil data artikel termasuk gambar
+  // Query mengambil data artikel
   const artikel = await client.fetch(
     `*[_type == "artikel" && slug.current == $slug][0]`,
     { slug }
   );
 
+  // Jika artikel tidak ditemukan
   if (!artikel) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center text-white bg-[#0B0C10]">
@@ -37,7 +39,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
         {/* Judul */}
         <h1 className="text-4xl font-serif font-bold mb-6 leading-tight">{artikel.judulArtikel}</h1>
         
-        {/* Gambar Utama: Konsisten dengan gaya daftar artikel */}
+        {/* Gambar Utama */}
         {artikel.gambar && (
           <div className="relative w-full aspect-[16/9] mb-8 rounded-xl overflow-hidden shadow-2xl border border-zinc-800">
             <Image 
@@ -46,7 +48,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
               fill
               className="object-cover transition-transform duration-700 hover:scale-105"
               priority
-              unoptimized // Penting untuk memastikan gambar Sanity tampil tanpa kendala optimasi
+              unoptimized
             />
           </div>
         )}
@@ -59,9 +61,33 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
           <span>{artikel.date || "Tanpa Tanggal"}</span>
         </div>
 
-        {/* Konten */}
-        <div className="text-zinc-300 leading-relaxed whitespace-pre-line text-lg">
-          {artikel.konten}
+        {/* Konten (Sudah diatur spasi manual) */}
+        <div className="text-zinc-300 leading-relaxed text-lg">
+          {artikel.konten ? (
+            <PortableText 
+              value={artikel.konten} 
+              components={{
+                block: {
+                  normal: ({children}) => <p className="mb-6">{children}</p>,
+                  h1: ({children}) => <h1 className="text-3xl font-bold mb-4 mt-8">{children}</h1>,
+                  h2: ({children}) => <h2 className="text-2xl font-bold mb-4 mt-6">{children}</h2>,
+                },
+                list: {
+                  bullet: ({children}) => <ul className="list-disc ml-6 mb-6">{children}</ul>,
+                  number: ({children}) => <ol className="list-decimal ml-6 mb-6">{children}</ol>,
+                },
+                listItem: {
+                  bullet: ({children}) => <li className="mb-2">{children}</li>,
+                },
+                marks: {
+                  strong: ({children}) => <strong className="font-bold text-white">{children}</strong>,
+                  em: ({children}) => <em className="italic">{children}</em>,
+                }
+              }}
+            />
+          ) : (
+            <p>Belum ada isi artikel.</p>
+          )}
         </div>
       </div>
     </div>
