@@ -188,7 +188,7 @@ export default function WorkspaceDynamicPage() {
       localStorage.setItem("satyavrata_chats", JSON.stringify(finalSessionsState));
     } catch (error: any) {
       console.error(error);
-    } finally { // <--- 1. PERBAIKAN DI SINI (SUDAH DOUBLE L)
+    } finally {
       setIsLoading(false);
     }
   };
@@ -309,7 +309,7 @@ export default function WorkspaceDynamicPage() {
 
         <div className="space-y-1 pt-2">
           <div className="text-[10px] font-bold text-zinc-500 tracking-wider uppercase px-2">Riwayat Perkara</div>
-          <div className="space-y-1 max-h-[calc(100vh-260px)] overflow-y-auto pr-1">
+          <div className="space-y-1 max-h-[calc(100dvh-260px)] overflow-y-auto pr-1">
             {filteredSessions.map((session) => (
               <div
                 key={session.id}
@@ -352,7 +352,8 @@ export default function WorkspaceDynamicPage() {
   );
 
   return (
-    <div className="fixed inset-0 z-[99999] h-screen w-screen bg-[#0B0C10] text-zinc-100 flex overflow-hidden font-sans selection:bg-amber-500 selection:text-zinc-950">
+    // PERBAIKAN UTAMA: Menggunakan h-[100dvh] agar tinggi aplikasi dinamis mengikuti area aktif layar HP
+    <div className="fixed inset-0 z-[99999] h-[100dvh] w-screen bg-[#0B0C10] text-zinc-100 flex overflow-hidden font-sans selection:bg-amber-500 selection:text-zinc-950">
       
       {/* 1. SIDEBAR DESKTOP */}
       <aside className="w-72 border-r border-zinc-800 hidden md:flex flex-col h-full shrink-0">
@@ -379,9 +380,10 @@ export default function WorkspaceDynamicPage() {
       )}
 
       {/* 3. DASHBOARD KOTAK CHAT UTAMA */}
-      <main className="flex-1 flex flex-col h-full bg-[#0B0C10] relative overflow-hidden">
+      <main className="flex-1 flex flex-col h-full bg-[#0B0C10] relative overflow-hidden justify-between">
         
-        <header className="h-16 border-b border-zinc-900 px-4 sm:px-6 flex items-center justify-between bg-zinc-900/20 backdrop-blur shrink-0">
+        {/* HEADER DASHBOARD CHAT */}
+        <header className="h-16 border-b border-zinc-900 px-4 sm:px-6 flex items-center justify-between bg-zinc-900/20 backdrop-blur shrink-0 z-20">
           <div className="flex items-center gap-3">
             <button 
               onClick={() => setIsMobileSidebarOpen(true)}
@@ -401,7 +403,8 @@ export default function WorkspaceDynamicPage() {
           </Link>
         </header>
 
-        <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-6 max-w-4xl w-full mx-auto pb-32">
+        {/* AREA ISI BALASAN CHAT */}
+        <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-6 max-w-4xl w-full mx-auto pb-4">
           {currentSession.messages.length === 0 ? (
             <div className="h-full flex flex-col items-center justify-center text-center space-y-4 pt-16 sm:pt-24 px-4">
               <div className="h-14 w-14 rounded-2xl bg-amber-500/10 flex items-center justify-center text-amber-500 animate-pulse">
@@ -444,8 +447,8 @@ export default function WorkspaceDynamicPage() {
           <div ref={chatEndRef} />
         </div>
 
-        {/* FORM PANEL INPUT BAWAH */}
-        <form onSubmit={handleSendMessage} className="absolute bottom-0 inset-x-0 p-4 sm:p-6 bg-gradient-to-t from-[#0B0C10] via-[#0B0C10]/95 to-transparent flex flex-col gap-2 z-30 shrink-0">
+        {/* PERBAIKAN FORM INPUT BAWAH: Menggunakan sticky bottom-0, ditambah padding-bottom ekstra khusus HP agar terhindar dari gesture bar */}
+        <form onSubmit={handleSendMessage} className="sticky bottom-0 inset-x-0 p-4 pb-6 sm:p-6 bg-[#0B0C10] border-t border-zinc-900/50 flex flex-col gap-2 z-30 shrink-0">
           
           <input 
             type="file" 
@@ -474,7 +477,7 @@ export default function WorkspaceDynamicPage() {
               onChange={(e) => setChatInput(e.target.value)} 
               onKeyDown={(e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); handleSendMessage(e); } }} 
               placeholder={isRecording ? "Mendengarkan rekaman audio, silakan bicara..." : "Perintahkan analisis atau draf berkas di sini..."} 
-              className={`w-full bg-transparent resize-none text-xs sm:text-sm text-zinc-200 placeholder-zinc-500 focus:outline-none min-h-[40px] max-h-[100px] transition-all ${isRecording ? "text-amber-400 font-medium" : ""}`} 
+              className={`w-full bg-transparent resize-none text-xs sm:text-sm text-zinc-200 placeholder-zinc-500 focus:outline-none min-h-[40px] max-h-[80px] transition-all ${isRecording ? "text-amber-400 font-medium" : ""}`} 
             />
             
             <div className="flex items-center justify-between border-t border-zinc-800/60 pt-2.5">
@@ -486,7 +489,7 @@ export default function WorkspaceDynamicPage() {
                   className={`p-2 rounded-lg transition-all flex items-center gap-1.5 text-[11px] sm:text-xs font-medium cursor-pointer ${selectedFile ? "text-amber-400 bg-amber-500/5 border border-amber-500/20" : "text-zinc-500 hover:text-amber-500 hover:bg-zinc-800/40"}`}
                 >
                   <Upload className="h-4 w-4" />
-                  <span className="hidden xs:inline sm:inline">Upload</span>
+                  <span className="hidden sm:inline">Upload</span>
                 </button>
 
                 <button
@@ -496,7 +499,7 @@ export default function WorkspaceDynamicPage() {
                   title={isRecording ? "Matikan Perekam" : "Aktifkan Pesan Suara"}
                 >
                   {isRecording ? <MicOff className="h-4 w-4" /> : <Mic className="h-4 w-4" />}
-                  <span className="hidden xs:inline sm:inline">{isRecording ? "Mendengarkan..." : "Pesan Suara"}</span>
+                  <span className="hidden sm:inline">{isRecording ? "Mendengarkan..." : "Pesan Suara"}</span>
                 </button>
 
               </div>
