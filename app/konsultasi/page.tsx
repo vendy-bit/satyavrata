@@ -1,10 +1,55 @@
 "use client";
 
+import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import dynamic from "next/dynamic";
 
 const LawyerCanvas = dynamic(() => import("../../components/Robot"), { ssr: false });
 
+// ==========================================
+// KOMPONEN INTERNAL UNTUK ANIMASI SCROLL
+// ==========================================
+function ScrollAnimate({ children, className = "", delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
+  const [isVisible, setIsVisible] = useState(false);
+  const elementRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.unobserve(entry.target);
+        }
+      },
+      { 
+        threshold: 0.05, 
+        rootMargin: "0px 0px -20px 0px" 
+      }
+    );
+
+    if (elementRef.current) {
+      observer.observe(elementRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div
+      ref={elementRef}
+      style={{ transitionDelay: `${delay}ms` }}
+      className={`transition-all duration-1000 ease-out transform ${
+        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+      } ${className}`}
+    >
+      {children}
+    </div>
+  );
+}
+
+// ==========================================
+// HALAMAN UTAMA BASE KONSULTASI AI
+// ==========================================
 export default function KonsultasiBasePage() {
   const router = useRouter();
 
@@ -15,47 +60,56 @@ export default function KonsultasiBasePage() {
   };
 
   return (
-    <div className="min-h-[calc(100vh-80px)] w-full bg-[#0B0C10] overflow-x-hidden font-sans flex items-center selection:bg-amber-500 selection:text-zinc-950">
+    <div className="min-h-screen w-full bg-[#0B0C10] overflow-x-hidden font-sans flex items-center selection:bg-amber-500 selection:text-zinc-950">
       
-      {/* AREA HERO COCOK DENGAN KONSISTENSI BERANDA */}
-      <main className="max-w-7xl mx-auto px-6 py-12 md:py-20 w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
+      {/* SUNTIKAN PADDING RESPONSIF (pt-28 untuk HP, pt-32 untuk Tablet, lg:pt-12 untuk Desktop) */}
+      <main className="max-w-7xl mx-auto px-6 pt-28 sm:pt-32 lg:pt-12 pb-16 md:py-20 w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
         
-        {/* Sisi Teks Kiri */}
+        {/* Sisi Teks Kiri - Dengan Animasi Fade Up */}
         <div className="lg:col-span-7 space-y-5 md:space-y-6 text-left">
-          <div className="inline-flex items-center gap-2 bg-black/80 border border-amber-500/30 px-4 py-2 rounded-full text-[10px] sm:text-xs text-amber-500 uppercase tracking-widest font-bold">
-            <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span>
-            Sistem Hukum Berbasis AI
-          </div>
+          <ScrollAnimate delay={0}>
+            <div className="inline-flex items-center gap-2 bg-black/80 border border-amber-500/30 px-4 py-2 rounded-full text-[10px] sm:text-xs text-amber-500 uppercase tracking-widest font-bold">
+              <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span>
+              Sistem Hukum Berbasis AI
+            </div>
+          </ScrollAnimate>
           
-          <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1] text-white">
-            Masa Depan Praktik <br />
-            <span className="text-amber-500 block mt-1 lg:mt-2">Hukum Terintegrasi</span>
-          </h1>
+          <ScrollAnimate delay={100}>
+            <h1 className="font-serif text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.15] text-white">
+              Masa Depan Praktik <br className="hidden sm:block" />
+              <span className="text-amber-500 block mt-1 lg:mt-2">Hukum Terintegrasi</span>
+            </h1>
+          </ScrollAnimate>
           
-          <p className="text-zinc-300 text-sm md:text-base lg:text-lg max-w-xl font-light leading-relaxed">
-            Transformasi digital litigasi modern Indonesia. Akselerasi riset yurisprudensi dan draf berkas perkara akurat dalam satu genggaman.
-          </p>
+          <ScrollAnimate delay={200}>
+            <p className="text-zinc-300 text-xs sm:text-sm md:text-base lg:text-lg max-w-xl font-light leading-relaxed">
+              Transformasi digital litigasi modern Indonesia. Akselerasi riset yurisprudensi dan draf berkas perkara akurat dalam satu genggaman.
+            </p>
+          </ScrollAnimate>
           
-          <div className="flex pt-2 md:pt-4">
-            {/* PERBAIKAN: Tombol diubah menjadi Konsultasi AI Sekarang */}
+          <ScrollAnimate delay={300} className="flex pt-2">
             <button 
               onClick={handleStartConsultation} 
-              className="w-full sm:w-auto text-center bg-amber-500 text-black font-bold px-10 py-4 rounded-xl hover:bg-amber-400 hover:scale-105 transition-all text-sm sm:text-base shadow-lg shadow-amber-500/20 uppercase tracking-wider"
+              className="w-full sm:w-auto text-center bg-amber-500 text-black font-bold px-10 py-4 rounded-xl hover:bg-amber-400 hover:scale-105 active:scale-95 transition-all text-xs sm:text-sm md:text-base shadow-lg shadow-amber-500/20 uppercase tracking-wider cursor-pointer"
             >
               Konsultasi AI Sekarang
             </button>
-          </div>
+          </ScrollAnimate>
         </div>
 
-        {/* Sisi Robot Kanan dengan Aura Glow Emas Menyala */}
-        <div className="lg:col-span-5 h-[380px] sm:h-[450px] w-full relative flex items-center justify-center overflow-visible">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[260px] sm:w-[320px] h-[260px] sm:h-[320px] bg-gradient-to-tr from-amber-500/20 to-yellow-600/10 rounded-full blur-[70px] sm:blur-[100px] animate-pulse pointer-events-none z-0" />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[100px] h-[100px] bg-amber-400/10 rounded-full blur-[30px] pointer-events-none z-0" />
-          
-          <div className="w-full h-full relative z-10">
-            <LawyerCanvas />
+        {/* Sisi Robot Kanan dengan Aura Glow Emas Menyala - Delay sedikit biar estetik */}
+        <ScrollAnimate delay={250} className="lg:col-span-5 w-full">
+          <div className="h-[280px] sm:h-[380px] lg:h-[450px] w-full relative flex items-center justify-center overflow-visible">
+            {/* Background Glow */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200px] sm:w-[320px] h-[200px] sm:h-[320px] bg-gradient-to-tr from-amber-500/20 to-yellow-600/10 rounded-full blur-[60px] sm:blur-[100px] animate-pulse pointer-events-none z-0" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80px] h-[80px] bg-amber-400/10 rounded-full blur-[25px] pointer-events-none z-0" />
+            
+            {/* Canvas Robot */}
+            <div className="w-full h-full relative z-10">
+              <LawyerCanvas />
+            </div>
           </div>
-        </div>
+        </ScrollAnimate>
 
       </main>
     </div>
