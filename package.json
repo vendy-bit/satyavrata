@@ -9,18 +9,29 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@ai-sdk/google": "^3.0.80",
+    "@ai-sdk/openai": "^3.0.67",
     "@portabletext/react": "^6.2.0",
     "@react-three/drei": "^10.7.7",
     "@react-three/fiber": "^9.6.1",
     "@react-three/rapier": "^2.2.0",
     "@sanity/image-url": "^2.1.1",
     "@sanity/vision": "^5.27.0",
+    "@tavily/core": "^0.7.3",
+    "ai": "^6.0.193",
+    "docx": "^9.7.1",
+    "exceljs": "^4.4.0",
+    "lucide-react": "^1.17.0",
     "meshline": "^3.3.1",
     "next": "16.2.6",
+    "next-auth": "^4.24.14",
     "next-sanity": "^13.0.4",
+    "openai": "^6.39.1",
     "react": "19.2.4",
     "react-dom": "19.2.4",
-    "three": "^0.184.0"
+    "react-markdown": "^10.1.0",
+    "three": "^0.184.0",
+    "zod": "^4.4.3"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",

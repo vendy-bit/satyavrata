@@ -71,7 +71,7 @@ export default function RootLayout({
                     <span className="text-[9px] tracking-[0.14em] uppercase text-zinc-400 leading-none block">Advocate & Legal Consultant</span>
                   </div>
                 </div>
-                <p className="text-zinc-400 text-sm leading-relaxed">Firma hukum berdedikasi tinggi mengedepankan integritas dan profesionalisme. Kami hadir untuk memberikan solusi hukum strategis dan melindungi hak Anda.</p>
+                <p className="text-zinc-400 text-sm leading-relaxed">Kantor Hukum berdedikasi tinggi mengedepankan integritas dan profesionalisme. Kami hadir untuk memberikan solusi hukum strategis dan melindungi hak Anda.</p>
               </div>
               
               {/* KOLOM 2: MENU UTAMA */}
@@ -83,7 +83,8 @@ export default function RootLayout({
                   <li><Link href="/tim" className="text-zinc-400 hover:text-amber-500 transition-colors text-sm flex items-center gap-2"><span className="text-amber-500/50">›</span> Tim Advokat</Link></li>
                   <li><Link href="/artikel" className="text-zinc-400 hover:text-amber-500 transition-colors text-sm flex items-center gap-2"><span className="text-amber-500/50">›</span> Artikel / Wawasan</Link></li>
                   <li><Link href="/jdih" className="text-zinc-400 hover:text-amber-500 transition-colors text-sm flex items-center gap-2"><span className="text-amber-500/50">›</span> JDIH</Link></li>
-                  <li><Link href="/galeri" className="text-zinc-400 hover:text-amber-500 transition-colors text-sm flex items-center gap-2"><span className="text-amber-500/50">›</span> Galeri Klien</Link></li>
+                  <li><Link href="/galeri" className="text-zinc-400 hover:text-amber-500 transition-colors text-sm flex items-center gap-2"><span className="text-amber-500/50">›</span> Galeri</Link></li>
+                  <li><Link href="/konsultasi" className="text-zinc-400 hover:text-amber-500 transition-colors text-sm flex items-center gap-2"><span className="text-amber-500/50">›</span> Konsultasi AI</Link></li>
                   <li><Link href="/kontak" className="text-zinc-400 hover:text-amber-500 transition-colors text-sm flex items-center gap-2"><span className="text-amber-500/50">›</span> Kontak</Link></li>
                 </ul>
               </div>

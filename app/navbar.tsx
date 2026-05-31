@@ -18,18 +18,18 @@ export default function Navbar() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // Data Navigasi disesuaikan dengan folder di dalam app milikmu
+  // Data Navigasi disesuaikan dengan folder di dalam app (Ditambahkan Konsultasi AI)
   const navItems = [
     { name: 'Beranda', path: '/' },
     { name: 'Tentang Kami', path: '/tentang' },
     { name: 'Tim Kami', path: '/tim' },
     { name: 'Artikel', path: '/artikel' },
-    { name: 'JDIH', path: '/jdih' }, // Menu JDIH ditambahkan di sini
+    { name: 'JDIH', path: '/jdih' }, 
     { name: 'Galeri', path: '/galeri' },
+    { name: 'Konsultasi AI', path: '/konsultasi' }, // Sinkronisasi otomatis di mobile menu
   ];
 
   return (
-    /* h-16 = lebih pendek, bg-black/50 = transparansi 50% hitam */
     <header className="fixed top-0 left-0 w-full z-[100] bg-black/50 backdrop-blur-md border-b border-white/5">
       <div className="container mx-auto px-6 h-16 flex items-center justify-between">
         
@@ -45,8 +45,8 @@ export default function Navbar() {
         </Link>
 
         {/* NAV DESKTOP */}
-        <nav className="hidden lg:flex items-center gap-8 font-sans text-[10px] uppercase tracking-[0.2em] text-white font-bold">
-          {navItems.map((item) => (
+        <nav className="hidden lg:flex items-center gap-6 font-sans text-[10px] uppercase tracking-[0.2em] text-white font-bold">
+          {navItems.slice(0, 6).map((item) => (
             <Link 
               key={item.name} 
               href={item.path} 
@@ -56,8 +56,13 @@ export default function Navbar() {
             </Link>
           ))}
           
-          <Link href="/kontak" className="px-5 py-1.5 border border-amber-500 text-amber-500 hover:bg-amber-500 hover:text-black transition-all rounded-sm">
+          <Link href="/kontak" className="px-4 py-1.5 border border-amber-500 text-amber-500 hover:bg-amber-500 hover:text-black transition-all rounded-sm tracking-[0.2em]">
             KONTAK
+          </Link>
+
+          {/* TOMBOL PREMIUM UTAMA: KONSULTASI AI */}
+          <Link href="/konsultasi" className="px-4 py-1.5 bg-amber-500 text-black border border-amber-500 hover:bg-amber-400 hover:border-amber-400 transition-all rounded-sm tracking-[0.2em] font-extrabold shadow-lg shadow-amber-500/10">
+            KONSULTASI AI
           </Link>
         </nav>
 
@@ -81,7 +86,7 @@ export default function Navbar() {
               key={item.name} 
               href={item.path} 
               onClick={() => setIsMenuOpen(false)}
-              className="text-left py-2 hover:text-amber-500 transition-colors text-white block"
+              className={`text-left py-2 transition-colors block ${item.name === 'Konsultasi AI' ? 'text-amber-500 font-extrabold' : 'text-white hover:text-amber-500'}`}
             >
               {item.name}
             </Link>
